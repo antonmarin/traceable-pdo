@@ -9,8 +9,8 @@ namespace traceablePdo;
  */
 class TraceablePDO extends \PDO
 {
-    /** @var int Depth of trace */
-    public $traceLevel = 7;
+    /** @var int Depth of trace. Disabled if false */
+    public $traceLevel = false;
 
     /**
      * {@inheritdoc}
@@ -42,7 +42,7 @@ class TraceablePDO extends \PDO
                 && (!defined('YII2_PATH') || strpos($trace['file'], YII2_PATH) !== 0)
             ) {
                 $traces[] = "#$count {$trace['file']}:{$trace['line']}";
-                if (++$count >= $this->traceLevel) {
+                if ($this->traceLevel !== false && ++$count >= $this->traceLevel) {
                     break;
                 }
             }
