@@ -1,0 +1,30 @@
+{
+    "autoload": {
+        "psr-4": {
+            "traceablePDO\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "traceablePDOtests\\": "tests/"
+        }
+    },
+    "name": "antonmarin/traceable-pdo",
+    "description": "Wrapper for PDO that adds trace of statement sounce to analyze slow statements in real-time",
+    "keywords": ["PDO", "trace"],
+    "minimum-stability": "stable",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Anton Marin",
+            "email": "antonaryo85@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8",
+        "ext-pdo_sqlite": "^1.0"
+    }
+}
