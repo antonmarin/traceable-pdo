@@ -3,6 +3,7 @@
 namespace traceablePDOtests;
 
 
+use ReflectionClass;
 use traceablePDO\PDO;
 
 /**
@@ -174,8 +175,11 @@ class PDOTest extends \PHPUnit_Framework_TestCase
 
 
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-        $trace = array_filter($trace, function ($row) {
-            return !isset($row['file']) || $row['file'] != __FILE__;
+        array_unshift($trace, array('file' => __FILE__, 'line' => 193)); // line of ->prepare() call
+        $reflector = new ReflectionClass('traceablePDO\PDO');
+        $pdoFile = $reflector->getFileName();
+        $trace = array_filter($trace, function ($row) use ($pdoFile){
+            return !isset($row['file']) || $row['file'] != $pdoFile;
         });
         $result = '';
         foreach ($trace as $item) {
