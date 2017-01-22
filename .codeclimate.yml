@@ -16,6 +16,8 @@ engines:
     enabled: true
   phan:
     enabled: true
+    exclude_fingerprints:
+        - fbfb87a97ab8198d2811f97b2fa0be02
     config:
       backward-compatibility-checks: true
       dead-code-detection: true
