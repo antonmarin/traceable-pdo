@@ -10,7 +10,7 @@
         }
     },
     "name": "antonmarin/traceable-pdo",
-    "description": "Wrapper for PDO that adds trace of statement sounce to analyze slow statements in real-time",
+    "description": "Wrapper for PDO that adds trace of statement source to analyze slow statements in real-time",
     "keywords": ["PDO", "trace"],
     "minimum-stability": "stable",
     "license": "GPL-3.0",
