@@ -1,0 +1,28 @@
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+        - php
+  fixme:
+    enabled: true
+  markdownlint:
+    enabled: true
+  phpcodesniffer:
+    enabled: true
+    config:
+      encoding: utf-8
+  phpmd:
+    enabled: true
+  phan:
+    enabled: true
+    config:
+      backward-compatibility-checks: true
+      dead-code-detection: true
+      file_extensions: "php"
+exclude_paths:
+  - tests/
+  - vendor/
+ratings:
+  paths:
+    - "**.php"
