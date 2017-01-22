@@ -11,6 +11,6 @@ before_install:
 install:
   - composer install
 after_script:
-  - vendor/bin/test-reporter --coverage-report tests/logs/clover.xml
+  - vendor/bin/test-reporter --coverage-report tests/output/clover.xml
 addons:
   code_climate:
