@@ -9,7 +9,7 @@ namespace traceablePDO;
  */
 class PDO extends \PDO
 {
-    /** @var int Depth of trace. Disabled if false */
+    /** @var int|bool Depth of trace. Disabled if false */
     public $traceLevel = false;
 
     /**
