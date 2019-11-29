@@ -18,7 +18,7 @@ class PDO extends \PDO
      * @internal Overrided to add trace
      * @noinspection PhpSignatureMismatchDuringInheritanceInspection
      */
-    public function prepare($statement, $options = array())
+    public function prepare($statement, $options = [])
     {
         $trace = $this->getTrace();
         $trace = $this->cutTrace($trace);
@@ -36,9 +36,12 @@ class PDO extends \PDO
     protected function getTrace()
     {
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-        $trace = array_filter($trace, static function ($row) {
-            return !isset($row['file']) || $row['file'] !== __FILE__;
-        });
+        $trace = array_filter(
+            $trace,
+            static function ($row) {
+                return !isset($row['file']) || $row['file'] !== __FILE__;
+            }
+        );
 
         return $trace;
     }
@@ -68,7 +71,7 @@ class PDO extends \PDO
      */
     protected function formatTrace(array $trace)
     {
-        $traceStrings = array();
+        $traceStrings = [];
         foreach ($trace as $key => $row) {
             if (isset($row['file'], $row['line'])) {
                 $traceStrings[] .= sprintf('#%d %s:%d', $key, $row['file'], $row['line']);
