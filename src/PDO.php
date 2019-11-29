@@ -1,6 +1,6 @@
 <?php
 
-namespace traceablePDO;
+namespace antonmarin\TraceablePDO;
 
 /**
  * PDO подключение к базе
@@ -16,6 +16,7 @@ class PDO extends \PDO
      * {@inheritdoc}
      *
      * @internal Overrided to add trace
+     * @noinspection PhpSignatureMismatchDuringInheritanceInspection
      */
     public function prepare($statement, $options = array())
     {
@@ -35,8 +36,8 @@ class PDO extends \PDO
     protected function getTrace()
     {
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-        $trace = array_filter($trace, function ($row) {
-            return !isset($row['file']) || $row['file'] != __FILE__;
+        $trace = array_filter($trace, static function ($row) {
+            return !isset($row['file']) || $row['file'] !== __FILE__;
         });
 
         return $trace;
@@ -69,7 +70,7 @@ class PDO extends \PDO
     {
         $traceStrings = array();
         foreach ($trace as $key => $row) {
-            if (isset($row['file']) && isset($row['line'])) {
+            if (isset($row['file'], $row['line'])) {
                 $traceStrings[] .= sprintf('#%d %s:%d', $key, $row['file'], $row['line']);
             }
         }
