@@ -15,8 +15,8 @@ tasks:
 
   lint:
     cmds:
-      - docker run --rm  -v ${PWD}:/work
-        cytopia/php-cs-fixer:2 fix --dry-run --diff .
+      - docker run --rm  -v ${PWD}:/data
+        cytopia/php-cs-fixer:2 fix --dry-run --diff --allow-risky=yes .
 
   # rebuilds library with php version
   # Vars: PHP_VERSION ex:7.1

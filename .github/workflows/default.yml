@@ -1,0 +1,13 @@
+name: default
+on: [push]
+jobs:
+    php-cs-fixer:
+        name: Validate codestyle
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v1
+            - name: Install Task
+              run: curl -sL https://taskfile.dev/install.sh | sh
+            - name: run php-cs-fixer
+              run: ./bin/task lint
