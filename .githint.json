@@ -1,6 +1,7 @@
 {
   "options": {
-    "detectPull": true
+    "detectPull": true,
+    "skip": "branch.name == 'master'"
   },
   "checks": {
     "This check always passes": "true",
