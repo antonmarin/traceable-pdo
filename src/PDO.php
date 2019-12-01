@@ -90,7 +90,7 @@ class PDO extends \PDO
      */
     protected function comment($string)
     {
-        return ' /* ' . $this->encode($string) . ' */ ';
+        return ' /* '.$this->encode($string).' */ ';
     }
 
     /**

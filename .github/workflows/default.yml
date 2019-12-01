@@ -2,12 +2,12 @@ name: default
 on: [push]
 jobs:
     php-cs-fixer:
-        name: Validate codestyle
+        name: Lint
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
               uses: actions/checkout@v1
             - name: Install Task
               run: curl -sL https://taskfile.dev/install.sh | sh
-            - name: run php-cs-fixer
+            - name: Lint
               run: ./bin/task lint

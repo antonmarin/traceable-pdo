@@ -87,7 +87,7 @@ class PDOTest extends PHPUnit_Framework_TestCase
         $pdo->method('comment')
             ->willReturnCallback(
                 static function ($formattedTrace) {
-                    return ' /* ' . $formattedTrace . ' */';
+                    return ' /* '.$formattedTrace.' */';
                 }
             );
 
@@ -119,7 +119,7 @@ class PDOTest extends PHPUnit_Framework_TestCase
                 static function ($cutTrace) {
                     $result = '';
                     foreach ($cutTrace as $item) {
-                        $result .= $item['file'] . ':' . $item['line'];
+                        $result .= $item['file'].':'.$item['line'];
                     }
 
                     return $result;
@@ -128,7 +128,7 @@ class PDOTest extends PHPUnit_Framework_TestCase
         $pdo->method('comment')
             ->willReturnCallback(
                 static function ($formattedTrace) {
-                    return ' /* ' . $formattedTrace . ' */';
+                    return ' /* '.$formattedTrace.' */';
                 }
             );
 
@@ -136,8 +136,8 @@ class PDOTest extends PHPUnit_Framework_TestCase
         /** @var PDO $pdo */
         $statement = $pdo->prepare('SELECT 1');
         $this->assertEquals(
-            'SELECT 1 ' .
-            '/* ' . $trace[0]['file'] . ':' . $trace[0]['line'] . $trace[1]['file'] . ':' . $trace[1]['line'] . ' */',
+            'SELECT 1 '.
+            '/* '.$trace[0]['file'].':'.$trace[0]['line'].$trace[1]['file'].':'.$trace[1]['line'].' */',
             $statement->queryString
         );
 
@@ -145,7 +145,7 @@ class PDOTest extends PHPUnit_Framework_TestCase
         $pdo->traceLevel = $traceLevel;
         $statement = $pdo->prepare('SELECT 1');
         $this->assertEquals(
-            'SELECT 1 /* ' . $cutTrace[0]['file'] . ':' . $cutTrace[0]['line'] . ' */',
+            'SELECT 1 /* '.$cutTrace[0]['file'].':'.$cutTrace[0]['line'].' */',
             $statement->queryString
         );
     }
@@ -170,7 +170,7 @@ class PDOTest extends PHPUnit_Framework_TestCase
                         if (!isset($item['file'])) {
                             continue;
                         }
-                        $result .= $item['file'] . ':' . $item['line'];
+                        $result .= $item['file'].':'.$item['line'];
                     }
 
                     return $result;
@@ -199,7 +199,7 @@ class PDOTest extends PHPUnit_Framework_TestCase
             if (!isset($item['file'])) {
                 continue;
             }
-            $result .= $item['file'] . ':' . $item['line'];
+            $result .= $item['file'].':'.$item['line'];
         }
 
         /** @var PDO $pdo */

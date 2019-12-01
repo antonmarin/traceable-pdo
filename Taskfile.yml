@@ -13,10 +13,20 @@ tasks:
       - docker run --rm -v ${PWD}:/app -w /app
         antonmarin/php:{{ .PHP_VERSION }}-alpine-cli composer install
 
-  lint:
+  cs-fix:
+    desc: Fix codestyle
     cmds:
       - docker run --rm  -v ${PWD}:/data
-        cytopia/php-cs-fixer:2 fix --dry-run --diff --allow-risky=yes .
+        cytopia/php-cs-fixer:2 fix {{ .OPTIONS }} .
+    vars:
+      OPTIONS:
+        sh: echo {{ default "--allow-risky=yes" .OPTIONS }}
+
+  lint:
+    cmds:
+      - task: cs-fix
+        vars:
+          OPTIONS: "--dry-run --diff --allow-risky=yes"
 
   # rebuilds library with php version
   # Vars: PHP_VERSION ex:7.1
