@@ -24,3 +24,5 @@ jobs:
         run: curl -sL https://taskfile.dev/install.sh | sh
       - name: Test
         run: PHP_VERSION=${{ matrix.php }} ./bin/task test
+      - name: Coverage report
+        run: vendor/bin/test-reporter --coverage-report tests/output/clover.xml
