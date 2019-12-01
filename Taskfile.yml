@@ -41,7 +41,6 @@ tasks:
   # test library with special version
   # Vars: PHP_VERSION ex:7.1
   test:
-    deps: [lint]
     cmds:
       - task: rebuild
         vars:

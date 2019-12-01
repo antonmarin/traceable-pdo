@@ -185,7 +185,7 @@ class PDOTest extends PHPUnit_Framework_TestCase
             );
 
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-        array_unshift($trace, ['file' => __FILE__, 'line' => 193]); // line of ->prepare() call
+        array_unshift($trace, ['file' => __FILE__, 'line' => 206]); // line of ->prepare() call
         $reflector = new ReflectionClass(PDO::class);
         $pdoFile = $reflector->getFileName();
         $trace = array_filter(
