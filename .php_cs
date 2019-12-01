@@ -12,7 +12,7 @@ return PhpCsFixer\Config::create()
 
             'array_syntax' => ['syntax' => 'short'],
             'concat_space' => ['spacing' => 'none'],
-
             'method_argument_space' => ['on_multiline' => 'ensure_fully_multiline'],
+            'no_extra_blank_lines' => ['tokens' => ['extra']],
         ]
     );

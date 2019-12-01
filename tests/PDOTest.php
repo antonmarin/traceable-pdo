@@ -132,7 +132,6 @@ class PDOTest extends PHPUnit_Framework_TestCase
                 }
             );
 
-
         /** @var PDO $pdo */
         $statement = $pdo->prepare('SELECT 1');
         $this->assertEquals(
@@ -182,7 +181,6 @@ class PDOTest extends PHPUnit_Framework_TestCase
                     return " /* {$formattedTrace} */";
                 }
             );
-
 
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
         array_unshift($trace, ['file' => __FILE__, 'line' => 193]); // line of ->prepare() call
