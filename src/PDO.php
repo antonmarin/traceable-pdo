@@ -1,23 +1,24 @@
 <?php
 
-namespace traceablePDO;
+namespace antonmarin\TraceablePDO;
 
 /**
- * PDO подключение к базе
+ * PDO подключение к базе.
  *
  * Добавляет трейс к запросу
  */
 class PDO extends \PDO
 {
-    /** @var int|bool Depth of trace. Disabled if false */
+    /** @var bool|int Depth of trace. Disabled if false */
     public $traceLevel = false;
 
     /**
      * {@inheritdoc}
      *
      * @internal Overrided to add trace
+     * @noinspection PhpSignatureMismatchDuringInheritanceInspection
      */
-    public function prepare($statement, $options = array())
+    public function prepare($statement, $options = [])
     {
         $trace = $this->getTrace();
         $trace = $this->cutTrace($trace);
@@ -28,30 +29,31 @@ class PDO extends \PDO
     }
 
     /**
-     * Get trace of statement source without internal routes
+     * Get trace of statement source without internal routes.
      *
      * @return array [file, line, function, class, type]
      */
     protected function getTrace()
     {
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-        $trace = array_filter($trace, function ($row) {
-            return !isset($row['file']) || $row['file'] != __FILE__;
-        });
+        $trace = array_filter(
+            $trace,
+            static function ($row) {
+                return !isset($row['file']) || __FILE__ !== $row['file'];
+            }
+        );
 
         return $trace;
     }
 
     /**
-     * Cut trace to match {@link traceLevel}
-     *
-     * @param array $trace
+     * Cut trace to match {@link traceLevel}.
      *
      * @return array
      */
     protected function cutTrace(array $trace)
     {
-        if ($this->traceLevel !== false) {
+        if (false !== $this->traceLevel) {
             $trace = array_splice($trace, 0, $this->traceLevel);
         }
 
@@ -59,7 +61,7 @@ class PDO extends \PDO
     }
 
     /**
-     * Format trace to readable string
+     * Format trace to readable string.
      *
      * @param array $trace trace from {@link getTrace}
      *
@@ -67,9 +69,9 @@ class PDO extends \PDO
      */
     protected function formatTrace(array $trace)
     {
-        $traceStrings = array();
+        $traceStrings = [];
         foreach ($trace as $key => $row) {
-            if (isset($row['file']) && isset($row['line'])) {
+            if (isset($row['file'], $row['line'])) {
                 $traceStrings[] .= sprintf('#%d %s:%d', $key, $row['file'], $row['line']);
             }
         }
@@ -78,7 +80,7 @@ class PDO extends \PDO
     }
 
     /**
-     * Make string a comment to securely add to statement
+     * Make string a comment to securely add to statement.
      *
      * @param string $string
      *
@@ -86,11 +88,11 @@ class PDO extends \PDO
      */
     protected function comment($string)
     {
-        return ' /* ' . $this->encode($string) . ' */ ';
+        return ' /* '.$this->encode($string).' */ ';
     }
 
     /**
-     * Encode string to make it short string
+     * Encode string to make it short string.
      *
      * @param string $string
      *
