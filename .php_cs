@@ -10,8 +10,6 @@ return PhpCsFixer\Config::create()
             '@PSR1' => true,
             '@PSR2' => true,
             '@PhpCsFixer' => true,
-
-            'concat_space' => ['spacing' => 'none'],
         ]
     )
 ;
