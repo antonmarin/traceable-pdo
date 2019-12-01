@@ -22,8 +22,8 @@ phpunit.xml* export-ignore
 Taskfile.yml export-ignore
 
 ## configurations of supporting applications
-.codeclimate.yml
-.editorconfig
-.github/
-.gitignore
-.php_cs
+.codeclimate.yml export-ignore
+.editorconfig export-ignore
+.github/ export-ignore
+.gitignore export-ignore
+.php_cs export-ignore
