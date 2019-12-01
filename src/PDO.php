@@ -3,13 +3,13 @@
 namespace antonmarin\TraceablePDO;
 
 /**
- * PDO подключение к базе
+ * PDO подключение к базе.
  *
  * Добавляет трейс к запросу
  */
 class PDO extends \PDO
 {
-    /** @var int|bool Depth of trace. Disabled if false */
+    /** @var bool|int Depth of trace. Disabled if false */
     public $traceLevel = false;
 
     /**
@@ -29,7 +29,7 @@ class PDO extends \PDO
     }
 
     /**
-     * Get trace of statement source without internal routes
+     * Get trace of statement source without internal routes.
      *
      * @return array [file, line, function, class, type]
      */
@@ -39,7 +39,7 @@ class PDO extends \PDO
         $trace = array_filter(
             $trace,
             static function ($row) {
-                return !isset($row['file']) || $row['file'] !== __FILE__;
+                return !isset($row['file']) || __FILE__ !== $row['file'];
             }
         );
 
@@ -47,15 +47,13 @@ class PDO extends \PDO
     }
 
     /**
-     * Cut trace to match {@link traceLevel}
-     *
-     * @param array $trace
+     * Cut trace to match {@link traceLevel}.
      *
      * @return array
      */
     protected function cutTrace(array $trace)
     {
-        if ($this->traceLevel !== false) {
+        if (false !== $this->traceLevel) {
             $trace = array_splice($trace, 0, $this->traceLevel);
         }
 
@@ -63,7 +61,7 @@ class PDO extends \PDO
     }
 
     /**
-     * Format trace to readable string
+     * Format trace to readable string.
      *
      * @param array $trace trace from {@link getTrace}
      *
@@ -82,7 +80,7 @@ class PDO extends \PDO
     }
 
     /**
-     * Make string a comment to securely add to statement
+     * Make string a comment to securely add to statement.
      *
      * @param string $string
      *
@@ -94,7 +92,7 @@ class PDO extends \PDO
     }
 
     /**
-     * Encode string to make it short string
+     * Encode string to make it short string.
      *
      * @param string $string
      *

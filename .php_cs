@@ -9,10 +9,9 @@ return PhpCsFixer\Config::create()
         [
             '@PSR1' => true,
             '@PSR2' => true,
+            '@PhpCsFixer' => true,
 
-            'array_syntax' => ['syntax' => 'short'],
             'concat_space' => ['spacing' => 'none'],
-            'method_argument_space' => ['on_multiline' => 'ensure_fully_multiline'],
-            'no_extra_blank_lines' => ['tokens' => ['extra']],
         ]
-    );
+    )
+;
