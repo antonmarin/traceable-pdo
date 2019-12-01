@@ -22,4 +22,4 @@ phpunit.xml* export-ignore
 Taskfile.yml export-ignore
 
 ## configurations of supporting applications
-/.*
+/\.*
