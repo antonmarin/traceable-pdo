@@ -29,20 +29,15 @@ class PDOTest extends PHPUnit_Framework_TestCase
         $pdo = $this->getMockBuilder(PDO::class)
             ->setConstructorArgs(['sqlite::memory:'])
             ->setMethods(['getTrace', 'cutTrace', 'formatTrace', 'comment'])
-            ->getMock()
-        ;
+            ->getMock();
         $pdo->method('getTrace')
-            ->willReturn([])
-        ;
+            ->willReturn([]);
         $pdo->method('cutTrace')
-            ->willReturn([])
-        ;
+            ->willReturn([]);
         $pdo->method('formatTrace')
-            ->willReturn('')
-        ;
+            ->willReturn('');
         $pdo->method('comment')
-            ->willReturn(' /* some comment */ ')
-        ;
+            ->willReturn(' /* some comment */ ');
 
         /** @var PDO $pdo */
         $statement = $pdo->prepare('SELECT 1');
@@ -59,18 +54,14 @@ class PDOTest extends PHPUnit_Framework_TestCase
         $pdo = $this->getMockBuilder(PDO::class)
             ->setConstructorArgs(['sqlite::memory:'])
             ->setMethods(['getTrace', 'cutTrace', 'formatTrace'])
-            ->getMock()
-        ;
+            ->getMock();
         $pdo->method('getTrace')
-            ->willReturn([])
-        ;
+            ->willReturn([]);
         $pdo->method('cutTrace')
-            ->willReturn([])
-        ;
+            ->willReturn([]);
         $formattedTrace = ' /* some trace string */'; // with comment to disable inflect on statement
         $pdo->method('formatTrace')
-            ->willReturn($formattedTrace)
-        ;
+            ->willReturn($formattedTrace);
 
         $encodedString = base64_encode(gzcompress($formattedTrace));
         /** @var PDO $pdo */
@@ -87,24 +78,20 @@ class PDOTest extends PHPUnit_Framework_TestCase
         $pdo = $this->getMockBuilder(PDO::class)
             ->setConstructorArgs(['sqlite::memory:'])
             ->setMethods(['getTrace', 'cutTrace', 'comment'])
-            ->getMock()
-        ;
+            ->getMock();
         $pdo->method('getTrace')
-            ->willReturn([])
-        ;
+            ->willReturn([]);
         $cuttedTrace = [
             ['file' => 'file1', 'line' => 10],
         ];
         $pdo->method('cutTrace')
-            ->willReturn($cuttedTrace)
-        ;
+            ->willReturn($cuttedTrace);
         $pdo->method('comment')
             ->willReturnCallback(
                 static function ($formattedTrace) {
                     return ' /* '.$formattedTrace.' */';
                 }
-            )
-        ;
+            );
 
         $formattedTrace = sprintf('#%d %s:%d', 0, $cuttedTrace[0]['file'], $cuttedTrace[0]['line']);
         /** @var PDO $pdo */
@@ -121,16 +108,14 @@ class PDOTest extends PHPUnit_Framework_TestCase
         $pdo = $this->getMockBuilder(PDO::class)
             ->setConstructorArgs(['sqlite::memory:'])
             ->setMethods(['getTrace', 'formatTrace', 'comment'])
-            ->getMock()
-        ;
+            ->getMock();
         $trace = [
             ['file' => 'file1', 'line' => 10],
             ['file' => 'file2', 'line' => 12],
         ];
         $traceLevel = 1;
         $pdo->method('getTrace')
-            ->willReturn($trace)
-        ;
+            ->willReturn($trace);
         $pdo->method('formatTrace')
             ->willReturnCallback(
                 static function ($cutTrace) {
@@ -141,15 +126,13 @@ class PDOTest extends PHPUnit_Framework_TestCase
 
                     return $result;
                 }
-            )
-        ;
+            );
         $pdo->method('comment')
             ->willReturnCallback(
                 static function ($formattedTrace) {
                     return ' /* '.$formattedTrace.' */';
                 }
-            )
-        ;
+            );
 
         /** @var PDO $pdo */
         $statement = $pdo->prepare('SELECT 1');
@@ -177,11 +160,9 @@ class PDOTest extends PHPUnit_Framework_TestCase
         $pdo = $this->getMockBuilder(PDO::class)
             ->setConstructorArgs(['sqlite::memory:'])
             ->setMethods(['cutTrace', 'formatTrace', 'comment'])
-            ->getMock()
-        ;
+            ->getMock();
         $pdo->method('cutTrace')
-            ->willReturnArgument(0)
-        ;
+            ->willReturnArgument(0);
         $pdo->method('formatTrace')
             ->willReturnCallback(
                 static function ($cutTrace) {
@@ -195,15 +176,13 @@ class PDOTest extends PHPUnit_Framework_TestCase
 
                     return $result;
                 }
-            )
-        ;
+            );
         $pdo->method('comment')
             ->willReturnCallback(
                 static function ($formattedTrace) {
                     return " /* {$formattedTrace} */";
                 }
-            )
-        ;
+            );
 
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
         array_unshift($trace, ['file' => __FILE__, 'line' => 193]); // line of ->prepare() call

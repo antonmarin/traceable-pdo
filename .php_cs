@@ -10,6 +10,7 @@ return PhpCsFixer\Config::create()
             '@PSR1' => true,
             '@PSR2' => true,
             '@PhpCsFixer' => true,
+
+            'multiline_whitespace_before_semicolons' => ['strategy' => 'no_multi_line'],
         ]
-    )
-;
+    );
