@@ -12,5 +12,6 @@ return PhpCsFixer\Config::create()
             '@PhpCsFixer' => true,
 
             'multiline_whitespace_before_semicolons' => ['strategy' => 'no_multi_line'],
+            'phpdoc_align' => ['align' => 'left'],
         ]
     );
