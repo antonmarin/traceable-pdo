@@ -30,7 +30,7 @@ config/main.php
         'username' => 'root',
         'password' => 'pass',
         'charset' => 'utf8',
-        'pdoClass' => antonmarin\TraceablePDO\PDO::class, // this line sets traces
+        'pdoClass' => antonmarin\TraceablePDO\PDO::class, // this line adds traces
     ],
 ...
 ```
