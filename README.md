@@ -16,3 +16,21 @@ When you use `traceablePDO\PDO` your statement looks like
 `SELECT 1 /* eJxT0NdSKM7PTVUoKUpMTlUoLinKzEtX0NIHAF05B60= */`
 so to get trace you should just enter in your terminal
 `php -r 'echo gzuncompress(base64_decode("eJxT0NdSKM7PTVUoKUpMTlUoLinKzEtX0NIHAF05B60="));'`
+
+## Examples
+
+### Yii2
+
+config/main.php
+```php
+...
+    'db' => [
+        'class' => yii\db\Connection::class,
+        'dsn' => 'mysql:host=localhost;dbname=stay2',
+        'username' => 'root',
+        'password' => 'pass',
+        'charset' => 'utf8',
+        'pdoClass' => antonmarin\TraceablePDO\PDO::class, // this line sets traces
+    ],
+...
+```
